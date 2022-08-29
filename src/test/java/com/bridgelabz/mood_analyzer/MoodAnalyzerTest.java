@@ -5,20 +5,21 @@ import org.junit.Test;
 
 public class MoodAnalyzerTest {
     @Test
-    public void givenMessageShouldReturnTrue() {
-        try {
-            String mood = new MoodAnalyzer("Sad").analyseTheMood();
-            Assert.assertEquals("SAD", mood);
-        } catch (MoodAnalyzerException e) {
-            e.printStackTrace();
-        }
-    }
-    @Test
-    public void givenMessageShouldReturnMessage() {
+    public void givenMessageNullShouldReturnMessage() {
         try {
             new MoodAnalyzer(null).analyseTheMood();
         } catch (MoodAnalyzerException e) {
-            e.printStackTrace();
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_NULL,e.exceptionType);
+            System.out.println(e.getMessage());
+        }
+    }
+    @Test
+    public void givenMessageBlankShouldReturnMessage() {
+        try {
+            new MoodAnalyzer("").analyseTheMood();
+        } catch (MoodAnalyzerException e) {
+            Assert.assertEquals(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY,e.exceptionType);
+            System.out.println(e.getMessage());
         }
     }
 }

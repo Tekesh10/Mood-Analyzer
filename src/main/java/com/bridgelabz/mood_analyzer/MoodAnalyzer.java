@@ -7,11 +7,14 @@ public class MoodAnalyzer {
     }
     public String analyseTheMood() throws  MoodAnalyzerException {
         try {
+            if (message.length() == 0) {
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.ENTERED_EMPTY,"Please enter a mood");
+            }
             if (message.contains("Sad"))
                 return "SAD";
             return "HAPPY";
         } catch (NullPointerException e) {
-            throw  new MoodAnalyzerException("Please provide a valid input");
+            throw  new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.ENTERED_NULL,"Please provide a valid input");
         }
     }
 }
